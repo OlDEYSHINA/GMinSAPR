@@ -45,8 +45,15 @@
             this.buttonRotateLeft = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.buttonInvert = new System.Windows.Forms.Button();
+            this.buttonContrastTest = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonBlur = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -85,14 +92,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -201,11 +208,72 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // buttonInvert
+            // 
+            this.buttonInvert.Location = new System.Drawing.Point(637, 294);
+            this.buttonInvert.Name = "buttonInvert";
+            this.buttonInvert.Size = new System.Drawing.Size(123, 23);
+            this.buttonInvert.TabIndex = 10;
+            this.buttonInvert.Text = "Инвертировать";
+            this.buttonInvert.UseVisualStyleBackColor = true;
+            this.buttonInvert.Click += new System.EventHandler(this.buttonInvert_Click);
+            // 
+            // buttonContrastTest
+            // 
+            this.buttonContrastTest.Location = new System.Drawing.Point(6, 66);
+            this.buttonContrastTest.Name = "buttonContrastTest";
+            this.buttonContrastTest.Size = new System.Drawing.Size(151, 23);
+            this.buttonContrastTest.TabIndex = 11;
+            this.buttonContrastTest.Text = "Подтвердить";
+            this.buttonContrastTest.UseVisualStyleBackColor = true;
+            this.buttonContrastTest.Click += new System.EventHandler(this.buttonContrast_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.buttonContrastTest);
+            this.groupBox1.Location = new System.Drawing.Point(802, 294);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(163, 96);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Контрастность";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 38);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(151, 22);
+            this.textBox1.TabIndex = 12;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 17);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "от -100 до 100";
+            // 
+            // buttonBlur
+            // 
+            this.buttonBlur.Location = new System.Drawing.Point(637, 358);
+            this.buttonBlur.Name = "buttonBlur";
+            this.buttonBlur.Size = new System.Drawing.Size(123, 25);
+            this.buttonBlur.TabIndex = 13;
+            this.buttonBlur.Text = "Размытие";
+            this.buttonBlur.UseVisualStyleBackColor = true;
+            this.buttonBlur.Click += new System.EventHandler(this.buttonBlur_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1055, 541);
+            this.Controls.Add(this.buttonBlur);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.buttonInvert);
             this.Controls.Add(this.buttonIncrease);
             this.Controls.Add(this.buttonDecrease);
             this.Controls.Add(this.labelY);
@@ -223,6 +291,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,6 +317,12 @@
         private System.Windows.Forms.Button buttonDecrease;
         private System.Windows.Forms.Button buttonIncrease;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button buttonInvert;
+        private System.Windows.Forms.Button buttonContrastTest;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonBlur;
     }
 }
 
