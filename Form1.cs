@@ -37,7 +37,7 @@ namespace GVMSAPR
                 labelX.Text = "X=" + bitmap.Size.Height;
 
             }
-            catch (Exception exception)
+            catch
             {
                 MessageBox.Show("Error");
                 return;
@@ -117,7 +117,6 @@ namespace GVMSAPR
             {
 
             }
-
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -181,6 +180,7 @@ namespace GVMSAPR
                     {
                         newRed = Convert.ToByte(oldColor.R * contrast);
                     }
+
                     if (oldColor.G * contrast > 255)
                     {
                         newGreen = Convert.ToByte(255);
@@ -193,6 +193,7 @@ namespace GVMSAPR
                     {
                         newGreen = Convert.ToByte(oldColor.G * contrast);
                     }
+
                     if (oldColor.B * contrast > 255)
                     {
                         newBlue = Convert.ToByte(255);
@@ -205,102 +206,127 @@ namespace GVMSAPR
                     {
                         newBlue = Convert.ToByte(oldColor.B * contrast);
                     }
+
                     Color newColor = Color.FromArgb(oldColor.A, newRed, newGreen, newBlue);
                     bitmap.SetPixel(X, Y, newColor);
                 }
             }
+
             pictureBox1.Image = bitmap;
         }
 
         private void buttonBlur_Click(object sender, EventArgs e)
         {
             Color newPix;
-            int newRed = 0;
-            int newGreen = 0;
-            int newBlue = 0;
-            int countChanges = 0;
+            double newRed = 0;
+            double newGreen = 0;
+            double newBlue = 0;
+
             Color oldPix;
             for (int Y = 0; Y < bitmap.Height; Y++)
             {
-                for (int X = 0; X < bitmap.Width; X++)
+                for (int X = 2; X < bitmap.Width - 2; X++)
                 {
-                    if (X > 1)
+                    newRed = 0;
+                    newGreen = 0;
+                    newBlue = 0;
+                    for (int i = 0; i < 5; i++)
                     {
-                        if (Y > 1)
+                        oldPix = bitmap.GetPixel(X - 2 + i, Y);
+                        switch (i)
                         {
-                            oldPix = bitmap.GetPixel(X - 1, Y - 1);
-                            newRed = newRed + oldPix.R;
-                            newGreen = newGreen + oldPix.G;
-                            newBlue = newBlue + oldPix.B;
-                            countChanges++;
+                            case 0:
+                                newRed += oldPix.R * 0.028087;
+                                newGreen += oldPix.G * 0.028087;
+                                newBlue += oldPix.B * 0.028087;
+                                break;
+                            case 1:
+                                newRed += oldPix.R * 0.23431;
+                                newGreen += oldPix.G * 0.23431;
+                                newBlue += oldPix.B * 0.23431;
+                                break;
+                            case 2:
+                                newRed += oldPix.R * 0.475207;
+                                newGreen += oldPix.G * 0.475207;
+                                newBlue += oldPix.B * 0.475207;
+                                break;
+                            case 3:
+                                newRed += oldPix.R * 0.23431;
+                                newGreen += oldPix.G * 0.23431;
+                                newBlue += oldPix.B * 0.23431;
+                                break;
+                            case 4:
+                                newRed += oldPix.R * 0.028087;
+                                newGreen += oldPix.G * 0.028087;
+                                newBlue += oldPix.B * 0.028087;
+                                break;
+                            default:
+                                break;
+
+
                         }
-                        oldPix = bitmap.GetPixel(X - 1, Y);
-                        newRed = newRed + oldPix.R;
-                        newGreen = newGreen + oldPix.G;
-                        newBlue = newBlue + oldPix.B;
-                        countChanges++;
-                        if(Y<bitmap.Height-1)
-                        oldPix = bitmap.GetPixel(X - 1, Y + 1);
-                        newRed = newRed + oldPix.R;
-                        newGreen = newGreen + oldPix.G;
-                        newBlue = newBlue + oldPix.B;
-                        countChanges++;
+
                     }
 
-                    if (Y > 1)
-                    {
-                        oldPix = bitmap.GetPixel(X, Y - 1);
-                        newRed = newRed + oldPix.R;
-                        newGreen = newGreen + oldPix.G;
-                        newBlue = newBlue + oldPix.B;
-                        countChanges++;
-                        if (X < bitmap.Width-1)
-                        {
-                            oldPix = bitmap.GetPixel(X + 1, Y - 1);
-                            newRed = newRed + oldPix.R;
-                            newGreen = newGreen + oldPix.G;
-                            newBlue = newBlue + oldPix.B;
-                            countChanges++;
-                        }
-                    }
-                    oldPix = bitmap.GetPixel(X, Y);
-                    newRed = newRed + oldPix.R;
-                    newGreen = newGreen + oldPix.G;
-                    newBlue = newBlue + oldPix.B;
-                    countChanges++;
-                   
-                    if (Y < bitmap.Height-1)
-                    {
-                        oldPix = bitmap.GetPixel(X, Y + 1);
-                        newRed = newRed + oldPix.R;
-                        newGreen = newGreen + oldPix.G;
-                        newBlue = newBlue + oldPix.B;
-                        countChanges++;
-                        if (X < bitmap.Width-1)
-                        {
-                            oldPix = bitmap.GetPixel(X + 1, Y + 1);
-                            newRed = newRed + oldPix.R;
-                            newGreen = newGreen + oldPix.G;
-                            newBlue = newBlue + oldPix.B;
-                            countChanges++;
-                        }
-                    }
-                    if (X < bitmap.Width-1)
-                    {
-                        oldPix = bitmap.GetPixel(X + 1, Y);
-                        newRed = newRed + oldPix.R;
-                        newGreen = newGreen + oldPix.G;
-                        newBlue = newBlue + oldPix.B;
-                        countChanges++;
-                    }
-
-                    oldPix = bitmap.GetPixel(X, Y);
-                    newPix = Color.FromArgb(((oldPix.R*3)+ newRed / countChanges)/4, ((oldPix.B * 3) + newBlue / countChanges) / 4, ((oldPix.G * 3) + newGreen / countChanges) / 4);
-                    bitmap.SetPixel(X,Y,newPix);
+                    newPix = Color.FromArgb(Convert.ToInt32(newRed), Convert.ToInt32(newGreen),
+                        Convert.ToInt32(newBlue));
+                    bitmap.SetPixel(X, Y, newPix);
                 }
+
             }
 
-            pictureBox1.Image = bitmap;
+            for (int Y = 2; Y < bitmap.Height - 2; Y++)
+            {
+                for (int X = 0; X < bitmap.Width; X++)
+                {
+                    newRed = 0;
+                    newGreen = 0;
+                    newBlue = 0;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        oldPix = bitmap.GetPixel(X, Y - 2 + i);
+                        switch (i)
+                        {
+                            case 0:
+                                newRed += oldPix.R * 0.028087;
+                                newGreen += oldPix.G * 0.028087;
+                                newBlue += oldPix.B * 0.028087;
+                                break;
+                            case 1:
+                                newRed += oldPix.R * 0.23431;
+                                newGreen += oldPix.G * 0.23431;
+                                newBlue += oldPix.B * 0.23431;
+                                break;
+                            case 2:
+                                newRed += oldPix.R * 0.475207;
+                                newGreen += oldPix.G * 0.475207;
+                                newBlue += oldPix.B * 0.475207;
+                                break;
+                            case 3:
+                                newRed += oldPix.R * 0.23431;
+                                newGreen += oldPix.G * 0.23431;
+                                newBlue += oldPix.B * 0.23431;
+                                break;
+                            case 4:
+                                newRed += oldPix.R * 0.028087;
+                                newGreen += oldPix.G * 0.028087;
+                                newBlue += oldPix.B * 0.028087;
+                                break;
+                            default:
+                                break;
+
+
+                        }
+
+                    }
+
+                    newPix = Color.FromArgb(Convert.ToInt32(newRed), Convert.ToInt32(newGreen),
+                        Convert.ToInt32(newBlue));
+                    bitmap.SetPixel(X, Y, newPix);
+                }
+
+                pictureBox1.Image = bitmap;
+            }
         }
     }
 }
